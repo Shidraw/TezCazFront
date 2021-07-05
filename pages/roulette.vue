@@ -1,5 +1,5 @@
 <template>
-    <div class="container">
+    <div class="container mt-5">
         <h1>Roulette</h1>
         <div class="row">
             <div class="col-4">
@@ -53,7 +53,9 @@
                     betType: null,
                     number: null,
                     betValue: 1
-                }
+                },
+                red: [ 2, 4, 6, 8, 10, 11, 13, 15, 17, 20, 22, 24, 26, 28, 29, 31, 33, 35 ],
+                black: [ 1, 3, 5, 7, 9, 12, 14, 16, 18, 19, 21, 23, 25, 27, 30, 32, 34, 36 ]
             }
         },
         methods: {
@@ -109,15 +111,22 @@
                     console.log("Msg.data[0]")
                     console.log(msg.data[0])
                     if (transaction.parameter.entrypoint === 'startRoulette') {
-                        let transaction2 = msg.data[1]
-                        console.log("Msg.data[1]")
-                        console.log(transaction2)
-                        console.log(transaction2.target)
-                        if (msg.data[1] !== null) { 
+                        if (msg.data[1] !== undefined) { 
+                            let transaction2 = msg.data[1]
+                            console.log("Msg.data[1]")
+                            console.log(transaction2)
                             console.log("Ma public key Tezos :")
                             console.log(accountPkh)
                             console.log(transaction2.target.address)
-                            if(transaction2.target.address === accountPkh) {
+                            console.log(transaction.parameter.value)
+                            console.log($vm.form.number)
+                            let redTest = $vm.red.indexOf(transaction.parameter.value)
+                            console.log("Recherche dans tableau red")
+                            console.log(redTest)
+                            let blackTest = $vm.black.indexOf(transaction.parameter.value)
+                            console.log("Recherche dans tableau black")
+                            console.log(blackTest)
+                            if((transaction2.target.address === accountPkh && redTest != -1 && $vm.form.number == 0) || (transaction2.target.address === accountPkh && blackTest != -1 && $vm.form.number == 1) ) {
                                 $vm.$toast.open({
                                     message: 'Vous avez gagné !',
                                     type: 'info',
@@ -132,8 +141,15 @@
                                     duration: 15000
                                 });
                             }
+                        } else {
+                                $vm.$toast.open({
+                                    message: 'Vous avez perdu !',
+                                    type: 'info',
+                                    position: 'top',
+                                    duration: 15000
+                                });
                         }
-                    }
+                    }   
                 }            
             });
             init()
