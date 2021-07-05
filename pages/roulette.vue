@@ -14,7 +14,7 @@
             <div class="col-4">
                 <div class="form-group text-left">
                     <label for="">Votre choix</label>
-                    <select class="form-control" id="betNumber" v-model="form.Number" :disabled="form.betType===null" v-if="form.betType==1">
+                    <select class="form-control" id="betNumber" v-model="form.number" :disabled="form.betType===null" v-if="form.betType==1">
                         <option v-for="(n, i) in 37" :value="i" v-bind:key="i">{{ i }}</option>
                     </select>
                     <select class="form-control" id="betType" v-model="form.number" v-if="form.betType==0">
@@ -106,26 +106,27 @@
                 console.log(msg)
                 if (msg.data !== undefined) {
                     let transaction = msg.data[0]
+                    console.log("Msg.data[0]")
+                    console.log(msg.data[0])
                     if (transaction.parameter.entrypoint === 'startRoulette') {
-                        let myBet = null
-                        let storage_history_roulette = await axiosInstance.get('https://api.edo2net.tzkt.io/v1/contracts/'+process.env.CONTRACT_ROULETTE+'/storage/history')
-                        for (let index = 0; index < storage_history_roulette.data[1].value.players.length; index++) {
-                            const elem = storage_history_roulette.data[1].value.players[index]
-                            if (elem.addr === accountPkh) {
-                                myBet = elem.value
-                            }
-                        }
-                        if (myBet !== null) {
-                            if(myBet === transaction.parameter.value) {
+                        let transaction2 = msg.data[1]
+                        console.log("Msg.data[1]")
+                        console.log(transaction2)
+                        console.log(transaction2.target)
+                        if (msg.data[1] !== null) { 
+                            console.log("Ma public key Tezos :")
+                            console.log(accountPkh)
+                            console.log(transaction2.target.address)
+                            if(transaction2.target.address === accountPkh) {
                                 $vm.$toast.open({
-                                    message: 'Vous avez gagné ! Le numéro gagnant est le <b>' + transaction.parameter.value + '</b>',
+                                    message: 'Vous avez gagné !',
                                     type: 'info',
                                     position: 'top',
                                     duration: 15000
                                 });
                             } else {
                                 $vm.$toast.open({
-                                    message: 'Vous avez perdu, le numéro gagnant est le <b>' + transaction.parameter.value + '</b>',
+                                    message: 'Vous avez perdu !',
                                     type: 'info',
                                     position: 'top',
                                     duration: 15000

@@ -1,14 +1,30 @@
 <template>
-  <div>
-    <div class="row">
-        <div class="col-6">
-            <h1>Loto</h1>
-            <input type="numeric" v-model="form.number">
-            <input type="numeric" v-model="form.betValue">
-            <button @click="bet">Transaction</button>
-        </div>
+    <div class="container">
+        <h1>Loto</h1>
+            <div class="col-4">
+                <div class="form-group text-left">
+                    <label for="">Votre choix</label>
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1" v-model="form.number">
+                        <div class="input-group-append">
+                            <span class="input-group-text" id="basic-addon1"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="form-group text-left">
+                    <label for="">Montant de la mise</label>
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1" v-model="form.betValue">
+                        <div class="input-group-append">
+                            <span class="input-group-text" id="basic-addon1">ꜩ</span>
+                        </div>
+                    </div>
+                </div> 
+            </div>
+            <button type="button" class="btn btn-primary" @click="bet">Transaction</button>
     </div>
-  </div>
 </template>
 
 <script>
