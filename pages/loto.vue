@@ -1,29 +1,47 @@
 <template>
-    <div class="container">
+    <div class="container mt-5">
         <h1>Loto</h1>
-            <div class="col-4">
-                <div class="form-group text-left">
-                    <label for="">Votre choix</label>
-                    <div class="input-group mb-3">
-                        <input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1" v-model="form.number">
-                        <div class="input-group-append">
-                            <span class="input-group-text" id="basic-addon1"></span>
+        <Card type="simple" title="Roulette">
+                        <div class="card-body pb-0">
+                            <div class="row">
+                                <div class="col-8">
+                                    <h6 class="opacity-7 text-uppercase font-weight-bolder text-sm fadeIn1 fadeInBottom">Comment jouer ?</h6>
+                                    <div class="fadeIn1 fadeInBottom">
+                                    Le loto est composée d'une grille de numéros allant de 1 à 1000, voici son fonctionnement :
+                                        <ul>
+                                            <li>Le loto accepte une ou plusieurs mises variables en ꜩ de la part de chaque utilisateur.</li>
+                                            <li>Lorsque le loto est lancé, il choisit un numéro au hasard (1 à 1000).</li>
+                                            <li>Le ou les gagnants remportent l’ensemble des mises des autres joueurs.</li>
+                                            <li>Le loto est lancé par l'administrateur du Casino.</li>
+                                        </ul>    
+                                    </div>
+                                </div>
+                            </div>
                         </div>
+        </Card>
+        <div class="col-4">
+            <div class="form-group text-left">
+                <label for="">Votre choix</label>
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1" v-model="form.number">
+                    <div class="input-group-append">
+                        <span class="input-group-text" id="basic-addon1"></span>
                     </div>
                 </div>
             </div>
-            <div class="col-4">
-                <div class="form-group text-left">
-                    <label for="">Montant de la mise</label>
-                    <div class="input-group mb-3">
-                        <input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1" v-model="form.betValue">
-                        <div class="input-group-append">
-                            <span class="input-group-text" id="basic-addon1">ꜩ</span>
-                        </div>
+        </div>
+        <div class="col-4">
+            <div class="form-group text-left">
+                <label for="">Montant de la mise</label>
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1" v-model="form.betValue">
+                    <div class="input-group-append">
+                        <span class="input-group-text" id="basic-addon1">ꜩ</span>
                     </div>
-                </div> 
-            </div>
-            <button type="button" class="btn btn-primary" @click="bet">Transaction</button>
+                </div>
+            </div> 
+        </div>
+        <button type="button" class="btn btn-primary" @click="bet">Transaction</button>
     </div>
 </template>
 

@@ -1,6 +1,30 @@
 <template>
     <div class="container mt-5">
         <h1>Roulette</h1>
+        <Card type="simple" title="Roulette">
+                        <div class="card-body pb-0">
+                            <div class="row">
+                                <div class="col-8">
+                                    <h6 class="opacity-7 text-uppercase font-weight-bolder text-sm fadeIn1 fadeInBottom">Comment jouer ?</h6>
+                                    <p class="pe-sm-5 me-sm-5 fadeIn1 fadeInBottom">
+                                        La roue est composée de 37 numéros (0 à 36) et chaque numéro possède une couleur associée rouge ou noir, vert pour le 0.
+                                    </p>
+                                    <p class="fadeIn1 fadeInBottom">
+                                        Dans ce jeu, la mise est fixe à 1ꜩ mais vous pouvez miser sur une ou plusieurs probabilités.
+                                        <br>Vous allez donc parier sur la ou les cases sur lesquelles pourrait s'arrêter les billes.
+                                        <br>Voici les règles concernant les mises :
+                                    </p>
+                                    <div class="fadeIn1 fadeInBottom">
+                                        <ul>
+                                            <li>Si vous misez sur un chiffre de 1 à 36 vous remportez 20 fois votre mise.</li>
+                                            <li>Si vous misez sur une couleur et que la bille tombe dessus vous remportez 2 fois votre mise.</li>
+                                            <li>La roulette est lancée par l'administrateur du Casino.</li>
+                                        </ul>    
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+        </Card>
         <div class="row">
             <div class="col-4">
                 <div class="form-group text-left">
