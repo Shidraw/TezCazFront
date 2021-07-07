@@ -1,24 +1,20 @@
 <template>
-    <div class="container mt-5">
+    <div class="container mt-2">
         <h1>Loto</h1>
-        <Card type="simple" title="Roulette">
-                        <div class="card-body pb-0">
-                            <div class="row">
-                                <div class="col-8">
-                                    <h6 class="opacity-7 text-uppercase font-weight-bolder text-sm fadeIn1 fadeInBottom">Comment jouer ?</h6>
-                                    <div class="fadeIn1 fadeInBottom">
-                                    Le loto est composée d'une grille de numéros allant de 1 à 1000, voici son fonctionnement :
-                                        <ul>
-                                            <li>Le loto accepte une ou plusieurs mises variables en ꜩ de la part de chaque utilisateur.</li>
-                                            <li>Lorsque le loto est lancé, il choisit un numéro au hasard (1 à 1000).</li>
-                                            <li>Le ou les gagnants remportent l’ensemble des mises des autres joueurs.</li>
-                                            <li>Le loto est lancé par l'administrateur du Casino.</li>
-                                        </ul>    
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-        </Card>
+            <div class="row">
+                <div class="col-8">
+                    <h6 class="opacity-7 text-uppercase font-weight-bolder text-sm fadeIn1 fadeInBottom">Comment jouer ?</h6>
+                    <div class="fadeIn1 fadeInBottom">
+                    Le loto est composée d'une grille de numéros allant de 1 à 1000, voici son fonctionnement :
+                        <ul>
+                            <li>Le loto accepte une ou plusieurs mises variables en ꜩ de la part de chaque utilisateur.</li>
+                            <li>Lorsque le loto est lancé, il choisit un numéro au hasard (1 à 1000).</li>
+                            <li>Le ou les gagnants remportent l’ensemble des mises des autres joueurs.</li>
+                            <li>Le loto est lancé par l'administrateur du Casino.</li>
+                        </ul>    
+                    </div>
+                </div>
+        </div>
         <div class="col-4">
             <div class="form-group text-left">
                 <label for="">Votre choix</label>
@@ -51,13 +47,15 @@
     import * as signalR from '@microsoft/signalr'
 
     export default {
+    middleware:"connexion",
         data() {
             return {
                 Tezos:null,
                 form: {
                     number: 1,
                     betValue: 2
-                }
+                },
+                HubConnexion: null
             }
         },
         methods: {
@@ -86,13 +84,13 @@
 
             
 
-            const connection = new signalR.HubConnectionBuilder()
+            $vm.HubConnexion = new signalR.HubConnectionBuilder()
                   .withUrl("https://api.edo2net.tzkt.io/v1/events")
                   .build();
             async function init() {
-                await connection.start();
+                await $vm.HubConnexion.start();
                 // Ecoute des opérations du contrat LOTO
-                await connection.invoke("SubscribeToOperations", {
+                await $vm.HubConnexion.invoke("SubscribeToOperations", {
                     address: process.env.CONTRACT_LOTO,
                     types: 'transaction'
                 });
@@ -103,8 +101,8 @@
                 headers: {'X-Custom-Header': 'foobar'}
             });
             
-            connection.onclose(init);
-            connection.on("operations", async (msg) => {
+            //$vm.HubConnexion.onclose(init);
+            $vm.HubConnexion.on("operations", async (msg) => {
                 // Pour chaque opération on vérifie si la méthode startLoto a été call, puis on vérifie si le joueur connecté a gagné
                 console.log(msg)
                 if (msg.data !== undefined) {
@@ -139,6 +137,9 @@
                 }            
             });
             init()
+        },
+        beforeDestroy () {
+            this.HubConnexion.stop();
         },
     };
 </script>

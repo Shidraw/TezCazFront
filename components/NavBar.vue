@@ -1,10 +1,17 @@
 <template>
   <b-navbar type="dark" variant="dark">
     <b-navbar-brand href="#">TezCaz</b-navbar-brand>
-    <b-navbar-nav>
-      <nuxt-link class="nav-link text-danger" to="/admin">
-        Admin
-      </nuxt-link>
+    <b-navbar-nav class="me-auto">
+      <div v-if="$store.getters['account'] !== null">
+        <nuxt-link class="nav-link text-danger" to="/admin" v-if="$store.getters['account'].rights > 0">
+          Admin
+        </nuxt-link>
+      </div>
+      <li class="nav-item px-3">
+          <nuxt-link class="nav-link text-info" to="/">
+              Accueil
+          </nuxt-link>
+      </li>
       <li class="nav-item px-3">
           <nuxt-link class="nav-link text-info" to="/loto">
               Loto
@@ -15,8 +22,13 @@
               Roulette
           </nuxt-link>
       </li>
-      <b-nav-item :href="'https://better-call.dev/edo2net/'+ wallet" target="_blank">{{wallet}}</b-nav-item>
-      <b-nav-item href="#">{{balance}}</b-nav-item>
+      
+    </b-navbar-nav>
+    <b-navbar-nav style="right: 5px;position: absolute;">
+        <b-nav-item href="#" v-if="$store.getters['account'] !== null">Welcome, {{$store.getters['account'].login}}</b-nav-item>
+        <b-nav-item :href="'https://better-call.dev/edo2net/'+ wallet" target="_blank">Wallet: {{wallet}}</b-nav-item>
+        <b-nav-item href="#">Balance: {{balance}} ꜩ</b-nav-item>
+      
     </b-navbar-nav>
   </b-navbar>
 </template>
@@ -25,6 +37,7 @@
   import { TezosToolkit } from "@taquito/taquito";
 
   export default {
+    middleware:"connexion",
     data() {
       return {
         Tezos: null,

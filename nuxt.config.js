@@ -14,12 +14,12 @@ export default {
     ],
     env: {
         CONTRACT_LOTO: 'KT1FtAYbrYFYmJB2CkcLAU9TCRTfiyh1L2eF',
-        CONTRACT_ROULETTE: 'KT1B9BYhnQBoQEf5BfFVWWQGZevEahqZnjtF'
+        CONTRACT_ROULETTE: 'KT1QGEPXZzXavDJ6P4y5eX5P4RbCKs3TRPq2'
     },
     plugins:[
         '~/plugins/notify'
     ],
     axios: {
-        baseURL: 'http://localhost:8000'
+        baseURL: 'http://localhost:3001'
     },
 };

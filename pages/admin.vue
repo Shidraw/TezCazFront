@@ -22,6 +22,7 @@
     import { TezosToolkit } from "@taquito/taquito";
 
     export default {
+    middleware:"connexion",
         data() {
             return {
                 Tezos:null,

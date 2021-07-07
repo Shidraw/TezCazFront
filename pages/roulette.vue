@@ -1,30 +1,26 @@
 <template>
-    <div class="container mt-5">
+    <div class="container mt-2">
         <h1>Roulette</h1>
-        <Card type="simple" title="Roulette">
-                        <div class="card-body pb-0">
-                            <div class="row">
-                                <div class="col-8">
-                                    <h6 class="opacity-7 text-uppercase font-weight-bolder text-sm fadeIn1 fadeInBottom">Comment jouer ?</h6>
-                                    <p class="pe-sm-5 me-sm-5 fadeIn1 fadeInBottom">
-                                        La roue est composée de 37 numéros (0 à 36) et chaque numéro possède une couleur associée rouge ou noir, vert pour le 0.
-                                    </p>
-                                    <p class="fadeIn1 fadeInBottom">
-                                        Dans ce jeu, la mise est fixe à 1ꜩ mais vous pouvez miser sur une ou plusieurs probabilités.
-                                        <br>Vous allez donc parier sur la ou les cases sur lesquelles pourrait s'arrêter les billes.
-                                        <br>Voici les règles concernant les mises :
-                                    </p>
-                                    <div class="fadeIn1 fadeInBottom">
-                                        <ul>
-                                            <li>Si vous misez sur un chiffre de 1 à 36 vous remportez 20 fois votre mise.</li>
-                                            <li>Si vous misez sur une couleur et que la bille tombe dessus vous remportez 2 fois votre mise.</li>
-                                            <li>La roulette est lancée par l'administrateur du Casino.</li>
-                                        </ul>    
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-        </Card>
+            <div class="row">
+                <div class="col-8">
+                    <h6 class="opacity-7 text-uppercase font-weight-bolder text-sm fadeIn1 fadeInBottom">Comment jouer ?</h6>
+                    <p class="pe-sm-5 me-sm-5 fadeIn1 fadeInBottom">
+                        La roue est composée de 37 numéros (0 à 36) et chaque numéro possède une couleur associée rouge ou noir, vert pour le 0.
+                    </p>
+                    <p class="fadeIn1 fadeInBottom">
+                        Dans ce jeu, la mise est fixe à 1ꜩ mais vous pouvez miser sur une ou plusieurs probabilités.
+                        <br>Vous allez donc parier sur la ou les cases sur lesquelles pourrait s'arrêter les billes.
+                        <br>Voici les règles concernant les mises :
+                    </p>
+                    <div class="fadeIn1 fadeInBottom">
+                        <ul>
+                            <li>Si vous misez sur un chiffre de 1 à 36 vous remportez 20 fois votre mise.</li>
+                            <li>Si vous misez sur une couleur et que la bille tombe dessus vous remportez 2 fois votre mise.</li>
+                            <li>La roulette est lancée par l'administrateur du Casino.</li>
+                        </ul>    
+                    </div>
+                </div>
+        </div>
         <div class="row">
             <div class="col-4">
                 <div class="form-group text-left">
@@ -70,6 +66,7 @@
     import * as signalR from '@microsoft/signalr'
 
     export default {
+    middleware:"connexion",
         data() {
             return {
                 Tezos:null,
@@ -79,7 +76,8 @@
                     betValue: 1
                 },
                 red: [ 2, 4, 6, 8, 10, 11, 13, 15, 17, 20, 22, 24, 26, 28, 29, 31, 33, 35 ],
-                black: [ 1, 3, 5, 7, 9, 12, 14, 16, 18, 19, 21, 23, 25, 27, 30, 32, 34, 36 ]
+                black: [ 1, 3, 5, 7, 9, 12, 14, 16, 18, 19, 21, 23, 25, 27, 30, 32, 34, 36 ],
+                HubConnexion: null
             }
         },
         methods: {
@@ -108,13 +106,13 @@
 
             
 
-            const connection = new signalR.HubConnectionBuilder()
+            $vm.HubConnexion = new signalR.HubConnectionBuilder()
                   .withUrl("https://api.edo2net.tzkt.io/v1/events")
                   .build();
             async function init() {
-                await connection.start();
+                await $vm.HubConnexion.start();
                 // Ecoute des opérations du contrat ROULETTE
-                await connection.invoke("SubscribeToOperations", {
+                await $vm.HubConnexion.invoke("SubscribeToOperations", {
                     address: process.env.CONTRACT_ROULETTE,
                     types: 'transaction'
                 });
@@ -125,8 +123,8 @@
                 headers: {'X-Custom-Header': 'foobar'}
             });
             
-            connection.onclose(init);
-            connection.on("operations", async (msg) => {
+            //connection.onclose(init);
+            $vm.HubConnexion.on("operations", async (msg) => {
                 // Pour chaque opération on vérifie si la méthode startROULETTE a été call, puis on vérifie si le joueur connecté a gagné
                 console.log("Message :")
                 console.log(msg)
@@ -177,6 +175,9 @@
                 }            
             });
             init()
+        },
+        beforeDestroy () {
+            this.HubConnexion.stop();
         },
     };
 </script>
