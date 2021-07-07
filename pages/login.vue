@@ -1,16 +1,28 @@
 <template>
-  <div class="container mt-5">
-    <div class="row">
-        <div class="col-4"><input type="text" v-model="form.login" placeholder="Login" name="" id=""></div>
-        <div class="col-4"><input type="password" v-model="form.password" placeholder="password" name="" id=""></div>
-    </div>
-    <div class="row">
-        <div class="col-12">
-            <button @click="login" type="button" class="btn btn-primary">Se connecter</button>
-            <nuxt-link to="/register">S'enregistrer</nuxt-link>
+  <div class="container mt-2">
+    <main class="form-signin">
+    <form>
+        <h1 class="h3 mb-3 fw-normal">Veuillez vous connecter</h1>
+
+        <div class="form-floating">
+        <label for="floatingInput">Login</label>
+        <input type="text" class="form-control" id="floatingInput" v-model="form.login" placeholder="Votre login">
         </div>
-    </div>
+        <div class="form-floating">
+        <label for="floatingPassword">Password</label>
+        <input type="password" class="form-control" id="floatingPassword" v-model="form.password" placeholder="Votre mot de passe">
+        </div>
+
+        <div class="ad mb-3">
+        </div>
+        <button @click="login" class="w-100 btn btn-lg btn-primary" type="button">Se connecter</button>
+        <div class="register mb-5">
+            <nuxt-link to="/register">Pas de compte ? Inscrivez-vous</nuxt-link>
+        </div>
+    </form>
+    </main>
   </div>
+  
 </template>
 
 <script>

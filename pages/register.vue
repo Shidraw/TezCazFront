@@ -1,16 +1,30 @@
 <template>
   <div class="container mt-5">
-    <div class="row">
-        <div class="col-4"><input type="text" v-model="form.login" placeholder="Login" name="" id=""></div>
-        <div class="col-4"><input type="password" v-model="form.password" placeholder="password" name="" id=""></div>
-        <div class="col-4"><input type="password" v-model="form.confirmation_password" placeholder="password" name="" id=""></div>
-    </div>
-    <div class="row">
-        <div class="col-12">
-            <button @click="register" type="button" class="btn btn-primary">S'enregistrer</button>
-            <nuxt-link to="/login">Se connecter</nuxt-link>
+    <main class="form-signin">
+    <form>
+        <h1 class="h3 mb-3 fw-normal">Veuillez vous inscrire</h1>
+
+        <div class="form-floating">
+        <label for="floatingInput">Login</label>
+        <input type="text" class="form-control" id="floatingInput" v-model="form.login" placeholder="Votre login">
         </div>
-    </div>
+        <div class="form-floating">
+        <label for="floatingPassword">Password</label>
+        <input type="password" class="form-control" id="floatingPassword" v-model="form.password" placeholder="Votre mot de passe">
+        </div>
+        <div class="form-floating">
+        <label for="floatingPasswordConfirm">Password</label>
+        <input type="password" class="form-control" id="floatingPasswordConfirm" v-model="form.confirmation_password" placeholder="Confirmation de mot de passe">
+        </div>
+
+        <div class="ad mb-3">
+        </div>
+        <button @click="register" class="w-100 btn btn-lg btn-primary" type="button">S'inscrire</button>
+        <div class="register mb-5">
+            <nuxt-link to="/login">Déjà un compte ? Connectez-vous</nuxt-link>
+        </div>
+    </form>
+    </main>
   </div>
 </template>
 

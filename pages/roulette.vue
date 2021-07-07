@@ -75,8 +75,8 @@
                     number: null,
                     betValue: 1
                 },
-                red: [ 2, 4, 6, 8, 10, 11, 13, 15, 17, 20, 22, 24, 26, 28, 29, 31, 33, 35 ],
-                black: [ 1, 3, 5, 7, 9, 12, 14, 16, 18, 19, 21, 23, 25, 27, 30, 32, 34, 36 ],
+                red: [ '1', '3', '5', '7', '9', '12', '14', '16', '18', '19', '21', '23', '25', '27', '30', '32', '34', '36' ],
+                black: [ '2', '4', '6', '8', '10', '11', '13', '15', '17', '20', '22', '24', '26', '28', '29', '31', '33', '35' ],
                 HubConnexion: null
             }
         },
@@ -140,7 +140,9 @@
                             console.log("Ma public key Tezos :")
                             console.log(accountPkh)
                             console.log(transaction2.target.address)
+                            console.log("Numéro gagnant :")
                             console.log(transaction.parameter.value)
+                            console.log("Numéro choisi: ")
                             console.log($vm.form.number)
                             let redTest = $vm.red.indexOf(transaction.parameter.value)
                             console.log("Recherche dans tableau red")

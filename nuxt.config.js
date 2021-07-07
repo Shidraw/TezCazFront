@@ -14,7 +14,7 @@ export default {
     ],
     env: {
         CONTRACT_LOTO: 'KT1FtAYbrYFYmJB2CkcLAU9TCRTfiyh1L2eF',
-        CONTRACT_ROULETTE: 'KT1QGEPXZzXavDJ6P4y5eX5P4RbCKs3TRPq2'
+        CONTRACT_ROULETTE: 'KT1CUjWjhZCCVvSJdNz5ULta64jUKHjAX6o5'
     },
     plugins:[
         '~/plugins/notify'
