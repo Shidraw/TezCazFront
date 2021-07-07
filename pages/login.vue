@@ -1,25 +1,31 @@
 <template>
   <div class="container mt-2">
     <main class="form-signin">
-    <form>
-        <h1 class="h3 mb-3 fw-normal">Veuillez vous connecter</h1>
+    <div class="mt-4">
+        <b-card img-src="https://image.freepik.com/vecteurs-libre/creation-logo-mascotte-casino_142989-268.jpg" img-alt="Card image" img-left class="mb-3">
+            <b-card-text>
+                <form>
+                    <h1 class="h3 mb-3 fw-normal">Veuillez vous connecter</h1>
 
-        <div class="form-floating">
-        <label for="floatingInput">Login</label>
-        <input type="text" class="form-control" id="floatingInput" v-model="form.login" placeholder="Votre login">
-        </div>
-        <div class="form-floating">
-        <label for="floatingPassword">Password</label>
-        <input type="password" class="form-control" id="floatingPassword" v-model="form.password" placeholder="Votre mot de passe">
-        </div>
+                    <div class="form-floating">
+                    <label for="floatingInput">Login</label>
+                    <input type="text" class="form-control" id="floatingInput" v-model="form.login" placeholder="Votre login">
+                    </div>
+                    <div class="form-floating">
+                    <label for="floatingPassword">Password</label>
+                    <input type="password" class="form-control" id="floatingPassword" v-model="form.password" placeholder="Votre mot de passe">
+                    </div>
 
-        <div class="ad mb-3">
-        </div>
-        <button @click="login" class="w-100 btn btn-lg btn-primary" type="button">Se connecter</button>
-        <div class="register mb-5">
-            <nuxt-link to="/register">Pas de compte ? Inscrivez-vous</nuxt-link>
-        </div>
-    </form>
+                    <div class="ad mb-3">
+                    </div>
+                    <button @click="login" class="w-100 btn btn-lg btn-primary" type="button">Se connecter</button>
+                    <div class="register mb-5">
+                        <nuxt-link to="/register">Pas de compte ? Inscrivez-vous</nuxt-link>
+                    </div>
+                </form>
+            </b-card-text>
+        </b-card>
+    </div>
     </main>
   </div>
   
