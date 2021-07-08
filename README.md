@@ -1,9 +1,6 @@
 # TezCazFront
 Front-end for Casino project on Tezos
 
-# TezCazContracts
-Smart Contracts for Casino games on Tezos
-
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 This is the Front-End of a Casino built on the Tezos Blockchain, contracts can be found at https://github.com/Shidraw/TezCazContracts .
